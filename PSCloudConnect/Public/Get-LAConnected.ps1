@@ -97,7 +97,6 @@ function Get-LAConnected {
             # $UserCredential = Get-Credential 
             $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid -Credential $Credential -Authentication Basic -AllowRedirection 
             Import-PSSession $Session -AllowClobber -DisableNameChecking 
-            $Host.UI.RawUI.WindowTitle = $UserCredential.UserName + " (Office 365 Security & Compliance Center)"
         }
         
         # Skype Online
@@ -157,11 +156,11 @@ function Get-LAAzureConnected {
         Select-AzureRmSubscription -SubscriptionId $subscription.id -ErrorAction Stop
     }
     Catch {
-    Write-Host   "*********************************************************************" -foregroundcolor "magenta" -backgroundcolor "yellow"
-    Write-Host   "*********************************************************************" -foregroundcolor "magenta" -backgroundcolor "yellow"
-    Write-Output "   Azure credentials have expired. Authenticate again please."
-    Write-Host   "*********************************************************************" -foregroundcolor "magenta" -backgroundcolor "yellow"
-    Write-Host   "*********************************************************************" -foregroundcolor "magenta" -backgroundcolor "yellow"
+        Write-Host   "*********************************************************************" -foregroundcolor "magenta" -backgroundcolor "yellow"
+        Write-Host   "*********************************************************************" -foregroundcolor "magenta" -backgroundcolor "yellow"
+        Write-Output "   Azure credentials have expired. Authenticate again please."
+        Write-Host   "*********************************************************************" -foregroundcolor "magenta" -backgroundcolor "yellow"
+        Write-Host   "*********************************************************************" -foregroundcolor "magenta" -backgroundcolor "yellow"
         
         Remove-Item ($KeyPath + $json.name)
         Get-LAAzureConnected

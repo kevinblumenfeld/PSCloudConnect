@@ -22,7 +22,7 @@ Connects to Office 365 services and/or Azure.
 Connects to some or all of the Office 365/Azure services based on switches provided at runtime.
 
 Office 365 tenant name, for example, either contoso or contoso.onmicrosoft.com must be provided with -Tenant parameter
-For AzureOnly, provide a unique name for the -Tenant parameter
+When connecting to just Azure, it is still required to provide a unique name for the -Tenant parameter.
 
 Locally saves and encrypts to a file the username and password.
 The encrypted file...
