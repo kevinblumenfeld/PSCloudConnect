@@ -12,7 +12,11 @@ PSCloudConnect Allows a user to connect to Office 365 and Azure Tenants
 
 ## Installation
 
-Drop the entire module (including folder structure) in any path found when running: PS C:\> $env:PSModulePath
+Install-Module PSCloudConnect
+
+to update to the latest version
+
+Update-Module PSCloudConnect
 
 ## Usage
 
