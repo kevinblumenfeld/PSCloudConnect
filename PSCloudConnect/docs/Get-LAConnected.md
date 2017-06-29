@@ -28,10 +28,10 @@ Locally saves and encrypts to a file the username and password.
 The encrypted file...
    
 1.  can only be used on the computer and within the user's profile from which it was created.
-2.  is the same .txt for all the Office 365 Services.
-3.  for Azure is separate and is a .json file.
+2.  is the same .txt file for all the Office 365 Services.
+3.  for Azure is a separate .json file.
 
-If Azure or AzureOnly switch is used for first time:
+If Azure or AzureOnly switch is used **for first time**:
 
 1.  User will login as normal when prompted by Azure
 2.  User will be prompted to select which Azure Subscription
@@ -56,26 +56,30 @@ Transcript is started and kept in $env:USERPROFILE\ps\<tenantspecified\>
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-LAConnected -Tenant Contoso -AzureOnly
-```
-
-Connects to Azure Only
-For the mandatory parameter, Tenant, simply provide something that uniquely identifies the Azure Tenant
-
-### -------------------------- EXAMPLE 2 --------------------------
-```
 Get-LAConnected -Tenant Contoso -ExchangeAndMSOL
 ```
 
 Connects to MS Online Service (MSOL) and Exchange Online
-Office 365 tenant name, for example, either contoso or contoso.onmicrosoft.com must be provided with -Tenant positional parameter
+
+The tenant must be specified, for example either contoso or contoso.onmicrosoft.com
+
+### -------------------------- EXAMPLE 2 --------------------------
+```
+Get-LAConnected -Tenant Contoso -Skype -Azure -ExchangeAndMSOL
+```
+
+Connects to Azure, MS Online Service (MSOL), Exchange Online & Skype
+
+This is to illustrate that any number of individual services can be used to connect.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Get-LAConnected -Tenant Contoso -Skype -ExchangeAndMSOL
+Get-LAConnected -Tenant Contoso -AzureOnly
 ```
 
-Connects to MS Online Service (MSOL) and Exchange Online and Skype Online
+Connects to Azure Only
+
+For the mandatory parameter, Tenant, simply provide something that uniquely identifies the Azure Tenant
 
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
@@ -107,11 +111,10 @@ Connects to Azure, MS Online Service (MSOL), Exchange Online, Skype, SharePoint 
 
 ### -------------------------- EXAMPLE 8 --------------------------
 ```
-Get-LAConnected -Tenant Contoso -Skype -Azure -ExchangeAndMSOL
+Get-LAConnected -Tenant Contoso -Skype -ExchangeAndMSOL
 ```
 
-Connects to Azure, MS Online Service (MSOL), Exchange Online & Skype
-This is to illustrate that any number of individual services can be used to connect.
+Connects to MS Online Service (MSOL) and Exchange Online and Skype Online
 
 ## PARAMETERS
 
