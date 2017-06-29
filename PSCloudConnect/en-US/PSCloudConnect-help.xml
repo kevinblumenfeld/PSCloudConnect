@@ -255,26 +255,26 @@
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso</dev:code>
-<dev:remarks><maml:para>Connects by default to MS Online Service (MSOL) and Exchange Online (unless AzureOnly switch is used) Office 365 tenant name, for example, either contoso or contoso.onmicrosoft.com must be provided with -Tenant parameter
+<dev:code>Get-LAConnected -Tenant Contoso -ExchangeAndMSOL</dev:code>
+<dev:remarks><maml:para>Connects to MS Online Service (MSOL) and Exchange Online Office 365 tenant name, for example, either contoso or contoso.onmicrosoft.com must be provided with -Tenant positional parameter
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -Skype</dev:code>
-<dev:remarks><maml:para>Connects by default to MS Online Service (MSOL) and Exchange Online Connects to Skype Online
+<dev:code>Get-LAConnected -Tenant Contoso -Skype -ExchangeAndMSOL</dev:code>
+<dev:remarks><maml:para>Connects to MS Online Service (MSOL) and Exchange Online and Skype Online
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
 <dev:code>Get-LAConnected -Tenant Contoso -SharePoint</dev:code>
-<dev:remarks><maml:para>Connects by default to MS Online Service (MSOL) and Exchange Online Connects to SharePoint Online
+<dev:remarks><maml:para>Connects to SharePoint Online
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
 <dev:code>Get-LAConnected -Tenant Contoso -Compliance</dev:code>
-<dev:remarks><maml:para>Connects by default to MS Online Service (MSOL) and Exchange Online Connects to Compliance &amp; Security Center
+<dev:remarks><maml:para>Connects to Compliance &amp; Security Center
 </maml:para>
 </dev:remarks>
 </command:example>
@@ -291,7 +291,7 @@
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 8 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -Skype -Azure</dev:code>
+<dev:code>Get-LAConnected -Tenant Contoso -Skype -Azure -ExchangeAndMSOL</dev:code>
 <dev:remarks><maml:para>Connects to Azure, MS Online Service (MSOL), Exchange Online &amp; Skype This is to illustrate that any number of individual services can be used to connect.
 </maml:para>
 </dev:remarks>

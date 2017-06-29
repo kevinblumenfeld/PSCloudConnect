@@ -64,26 +64,24 @@ For the mandatory parameter, Tenant, simply provide something that uniquely iden
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-LAConnected -Tenant Contoso
+Get-LAConnected -Tenant Contoso -ExchangeAndMSOL
 ```
 
-Connects by default to MS Online Service (MSOL) and Exchange Online (unless AzureOnly switch is used)
-Office 365 tenant name, for example, either contoso or contoso.onmicrosoft.com must be provided with -Tenant parameter
+Connects to MS Online Service (MSOL) and Exchange Online
+Office 365 tenant name, for example, either contoso or contoso.onmicrosoft.com must be provided with -Tenant positional parameter
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Get-LAConnected -Tenant Contoso -Skype
+Get-LAConnected -Tenant Contoso -Skype -ExchangeAndMSOL
 ```
 
-Connects by default to MS Online Service (MSOL) and Exchange Online
-Connects to Skype Online
+Connects to MS Online Service (MSOL) and Exchange Online and Skype Online
 
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
 Get-LAConnected -Tenant Contoso -SharePoint
 ```
 
-Connects by default to MS Online Service (MSOL) and Exchange Online
 Connects to SharePoint Online
 
 ### -------------------------- EXAMPLE 5 --------------------------
@@ -91,7 +89,6 @@ Connects to SharePoint Online
 Get-LAConnected -Tenant Contoso -Compliance
 ```
 
-Connects by default to MS Online Service (MSOL) and Exchange Online
 Connects to Compliance & Security Center
 
 ### -------------------------- EXAMPLE 6 --------------------------
@@ -110,7 +107,7 @@ Connects to Azure, MS Online Service (MSOL), Exchange Online, Skype, SharePoint 
 
 ### -------------------------- EXAMPLE 8 --------------------------
 ```
-Get-LAConnected -Tenant Contoso -Skype -Azure
+Get-LAConnected -Tenant Contoso -Skype -Azure -ExchangeAndMSOL
 ```
 
 Connects to Azure, MS Online Service (MSOL), Exchange Online & Skype
