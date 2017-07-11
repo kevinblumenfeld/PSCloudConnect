@@ -74,7 +74,7 @@ function Get-LAConnected {
                 $Credential = New-Object System.Management.Automation.PSCredential -ArgumentList $UsernameString, $PwdSecureString 
             }
             else {
-                $Credential = Get-Credential -Message "Enter a username and password TEST"
+                $Credential = Get-Credential -Message "Enter a username and password"
                 $Credential.Password | ConvertFrom-SecureString | Out-File "$($KeyPath)\$Tenant.cred" -Force
                 $Credential.UserName | Out-File "$($KeyPath)\$Tenant.ucred"
             }
