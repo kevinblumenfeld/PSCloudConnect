@@ -9,11 +9,17 @@ schema: 2.0.0
 ## SYNOPSIS
 Connects to Office 365 services and/or Azure
 
+To install:
+Install-Module PSCloudConnect -Scope CurrentUser
+
+To update to the latest version:
+Update-Module PSCloudConnect
+
 ## SYNTAX
 
 ```
-Get-LAConnected [-Tenant] <String> [-ExchangeAndMSOL] [-All365] [-Azure] [-AzureOnly] [-Skype] [-SharePoint]
- [-Compliance] [-ComplianceLegacy] [-AzureADver2] [-WhatIf] [-Confirm] [<CommonParameters>]
+Get-LAConnected [-Tenant] <String> [-ExchangeAndMSOL] [-All365] [-Azure] [-Skype] [-SharePoint] [-Compliance]
+ [-AzureADver2] [-DeleteInvalid365Creds] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -74,19 +80,20 @@ This is to illustrate that any number of individual services can be used to conn
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Get-LAConnected -Tenant Contoso -AzureOnly
-```
-
-Connects to Azure Only
-
-For the mandatory parameter, Tenant, simply provide something that uniquely identifies the Azure Tenant
-
-### -------------------------- EXAMPLE 4 --------------------------
-```
 Get-LAConnected -Tenant Contoso -SharePoint
 ```
 
 Connects to SharePoint Online
+
+### -------------------------- EXAMPLE 4 --------------------------
+```
+Get-LAConnected -Tenant Contoso -DeleteInvalid365Creds
+```
+
+There is a switch, DeleteInvalid365Creds which can be used if invalid credentials were inadvertently entered.
+Typically a user can still login but they are prompted each time instead of using a saved credential.
+Use this switch with the Tenant parameter to delete the appropriate credentials.
+This will allow the user to enter credentials, at which point they will be properly saved for future use.
 
 ### -------------------------- EXAMPLE 5 --------------------------
 ```
@@ -178,21 +185,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -AzureOnly
-{{Connect to Azure by itself}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Skype
 {{Microsoft Skype}}
 
@@ -225,21 +217,6 @@ Accept wildcard characters: False
 
 ### -Compliance
 {{Office 365 Security and Compliance Center}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ComplianceLegacy
-{{Legacy Compliance Cmdlets}}
 
 ```yaml
 Type: SwitchParameter
@@ -291,6 +268,21 @@ Prompts you for confirmation before running the cmdlet.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DeleteInvalid365Creds
+{{Deletes credentials associated with tenant}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: 
 
 Required: False
 Position: Named

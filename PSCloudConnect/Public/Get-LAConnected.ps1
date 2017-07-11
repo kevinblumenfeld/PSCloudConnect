@@ -19,9 +19,6 @@ function Get-LAConnected {
         [Parameter(Mandatory = $false)]
         [switch] $Azure,    
 
-        [Parameter(Mandatory = $false)]
-        [switch] $AzureOnly,    
- 
         [parameter(Mandatory = $false)]
         [switch] $Skype,
           
@@ -32,10 +29,10 @@ function Get-LAConnected {
         [switch] $Compliance,
 
         [parameter(Mandatory = $false)]
-        [switch] $ComplianceLegacy,
-          
+        [switch] $AzureADver2,
+        
         [parameter(Mandatory = $false)]
-        [switch] $AzureADver2
+        [switch] $DeleteInvalid365Creds
         
     )
 
@@ -49,6 +46,11 @@ function Get-LAConnected {
         $RootPath = $env:USERPROFILE + "\ps\"
         $KeyPath = $Rootpath + "creds\"
 
+        # Delete invalid credentials - keep getting prompted even after saved
+        if ($DeleteInvalid365Creds) {
+            Remove-Item ($KeyPath + "$($Tenant).cred") 
+            Remove-Item ($KeyPath + "$($Tenant).ucred")
+        }
         # Create Directory for Transact Logs
         if (!(Test-Path ($RootPath + $Tenant + "\logs\"))) {
             New-Item -ItemType Directory -Force -Path ($RootPath + $Tenant + "\logs\")
@@ -65,19 +67,10 @@ function Get-LAConnected {
                 throw $_.Exception.Message
             }           
         }
-        if (! $AzureOnly) {
-            if (Test-Path ($KeyPath + "$($Tenant).cred")) {
-                $PwdSecureString = Get-Content ($KeyPath + "$($Tenant).cred") | ConvertTo-SecureString
-                $UsernameString = Get-Content ($KeyPath + "$($Tenant).ucred") 
-                $Credential = New-Object System.Management.Automation.PSCredential -ArgumentList $UsernameString, $PwdSecureString 
-            }
-            else {
-                $Credential = Get-Credential -Message "Enter a username and password"
-                $Credential.Password | ConvertFrom-SecureString | Out-File "$($KeyPath)\$Tenant.cred" -Force
-                $Credential.UserName | Out-File "$($KeyPath)\$Tenant.ucred"
-            }
+        if ($ExchangeAndMSOL -or $All365 -or $Skype -or $SharePoint -or $Compliance -or $AzureADver2) {
+            Get-LA365Connected
         }
-        if (! $AzureOnly -and $ExchangeAndMSOL) {
+        if ($ExchangeAndMSOL -or $All365) {
             # Office 365 Tenant
             Import-Module MsOnline
             Connect-MsolService -Credential $Credential
@@ -86,45 +79,47 @@ function Get-LAConnected {
             $exchangeSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell -Credential $Credential -Authentication Basic -AllowRedirection 
             Import-Module (Import-PSSession $exchangeSession -AllowClobber) -Global | Out-Null
         }
-
         # Security and Compliance Center
         if ($Compliance -or $All365) {
             $ccSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid/ -Credential $credential -Authentication Basic -AllowRedirection
             Import-Module (Import-PSSession $ccSession -AllowClobber) -Global | Out-Null
         }
-
-        if ($ComplianceLegacy) {
-            # $UserCredential = Get-Credential 
-            $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid -Credential $Credential -Authentication Basic -AllowRedirection 
-            Import-PSSession $Session -AllowClobber -DisableNameChecking 
-        }
-        
         # Skype Online
         if ($Skype -or $All365) {
             $sfboSession = New-CsOnlineSession -Credential $Credential
             Import-Module (Import-PSSession $sfboSession -AllowClobber) -Global | Out-Null
         }
-
         # SharePoint Online
         if ($SharePoint -or $All365) {
             Import-Module Microsoft.Online.SharePoint.PowerShell -DisableNameChecking 
             Connect-SPOService -Url ("https://" + $Tenant + "-admin.sharepoint.com") -credential $Credential
         }
-
         # Azure
-        if ($AzureOnly -or $Azure) {
+        if ($Azure) {
             Get-LAAzureConnected
         }
-        # Azure AD (Preview)
+        # Azure AD
         If ($AzureADver2) {
-            install-module azureadpreview
-            import-module azureadpreview
+            install-module azuread -AllowClobber -Force
+            import-module azuread -Force
             Connect-AzureAD -Credential $Credential
         }
-
     }
     End {
     } 
+}
+
+function Get-LA365Connected {
+    if (Test-Path ($KeyPath + "$($Tenant).cred")) {
+        $PwdSecureString = Get-Content ($KeyPath + "$($Tenant).cred") | ConvertTo-SecureString
+        $UsernameString = Get-Content ($KeyPath + "$($Tenant).ucred") 
+        $Credential = New-Object System.Management.Automation.PSCredential -ArgumentList $UsernameString, $PwdSecureString 
+    }
+    else {
+        $Credential = Get-Credential -Message "Enter a username and password TEST"
+        $Credential.Password | ConvertFrom-SecureString | Out-File "$($KeyPath)\$Tenant.cred" -Force
+        $Credential.UserName | Out-File "$($KeyPath)\$Tenant.ucred"
+    }
 }
 
 function Get-LAAzureConnected {

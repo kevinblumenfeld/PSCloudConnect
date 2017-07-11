@@ -7,6 +7,10 @@
 <command:noun>LAConnected</command:noun>
 <maml:description><maml:para>Connects to Office 365 services and/or Azure
 </maml:para>
+<maml:para>To install: Install-Module PSCloudConnect -Scope CurrentUser
+</maml:para>
+<maml:para>To update to the latest version: Update-Module PSCloudConnect
+</maml:para>
 </maml:description>
 </command:details>
 <maml:description><maml:para>Connects to Office 365 services and/or Azure.
@@ -67,14 +71,6 @@
 <maml:uri /></dev:type>
 <dev:defaultValue>False</dev:defaultValue>
 </command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>AzureOnly</maml:name>
-<maml:Description><maml:para>{{Connect to Azure by itself}}
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
 <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Skype</maml:name>
 <maml:Description><maml:para>{{Microsoft Skype}}
 </maml:para>
@@ -99,14 +95,6 @@
 <maml:uri /></dev:type>
 <dev:defaultValue>False</dev:defaultValue>
 </command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ComplianceLegacy</maml:name>
-<maml:Description><maml:para>{{Legacy Compliance Cmdlets}}
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
 <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>AzureADver2</maml:name>
 <maml:Description><maml:para>{{Azure Active Directory Version 2}}
 </maml:para>
@@ -125,6 +113,14 @@
 </command:parameter>
 <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
 <maml:Description><maml:para>Prompts you for confirmation before running the cmdlet.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>DeleteInvalid365Creds</maml:name>
+<maml:Description><maml:para>{{Deletes credentials associated with tenant}}
 </maml:para>
 </maml:Description>
 <dev:type><maml:name>SwitchParameter</maml:name>
@@ -169,15 +165,6 @@
 <maml:uri /></dev:type>
 <dev:defaultValue>False</dev:defaultValue>
 </command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>AzureOnly</maml:name>
-<maml:Description><maml:para>{{Connect to Azure by itself}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
 <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Skype</maml:name>
 <maml:Description><maml:para>{{Microsoft Skype}}
 </maml:para>
@@ -198,15 +185,6 @@
 </command:parameter>
 <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Compliance</maml:name>
 <maml:Description><maml:para>{{Office 365 Security and Compliance Center}}
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ComplianceLegacy</maml:name>
-<maml:Description><maml:para>{{Legacy Compliance Cmdlets}}
 </maml:para>
 </maml:Description>
 <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
@@ -241,6 +219,15 @@
 <maml:uri /></dev:type>
 <dev:defaultValue>False</dev:defaultValue>
 </command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>DeleteInvalid365Creds</maml:name>
+<maml:Description><maml:para>{{Deletes credentials associated with tenant}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
 </command:parameters>
 <command:inputTypes></command:inputTypes>
 <command:returnValues></command:returnValues>
@@ -265,16 +252,14 @@
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -AzureOnly</dev:code>
-<dev:remarks><maml:para>Connects to Azure Only
-</maml:para>
-<maml:para>For the mandatory parameter, Tenant, simply provide something that uniquely identifies the Azure Tenant
+<dev:code>Get-LAConnected -Tenant Contoso -SharePoint</dev:code>
+<dev:remarks><maml:para>Connects to SharePoint Online
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -SharePoint</dev:code>
-<dev:remarks><maml:para>Connects to SharePoint Online
+<dev:code>Get-LAConnected -Tenant Contoso -DeleteInvalid365Creds</dev:code>
+<dev:remarks><maml:para>There is a switch, DeleteInvalid365Creds which can be used if invalid credentials were inadvertently entered. Typically a user can still login but they are prompted each time instead of using a saved credential. Use this switch with the Tenant parameter to delete the appropriate credentials. This will allow the user to enter credentials, at which point they will be properly saved for future use.
 </maml:para>
 </dev:remarks>
 </command:example>
