@@ -9,10 +9,10 @@ schema: 2.0.0
 ## SYNOPSIS
 Connects to Office 365 services and/or Azure
 
-To install:
+**To install:**
 Install-Module PSCloudConnect -Scope CurrentUser
 
-To update to the latest version:
+**To update to the latest version:**
 Update-Module PSCloudConnect
 
 ## SYNTAX

@@ -5,11 +5,7 @@
 <command:details><command:name>Get-LAConnected</command:name>
 <command:verb>Get</command:verb>
 <command:noun>LAConnected</command:noun>
-<maml:description><maml:para>Connects to Office 365 services and/or Azure
-</maml:para>
-<maml:para>To install: Install-Module PSCloudConnect -Scope CurrentUser
-</maml:para>
-<maml:para>To update to the latest version: Update-Module PSCloudConnect
+<maml:description><maml:para>Connects to Office 365 services and/or Azure To install: Install-Module PSCloudConnect -Scope CurrentUser To update to the latest version: Update-Module PSCloudConnect
 </maml:para>
 </maml:description>
 </command:details>
