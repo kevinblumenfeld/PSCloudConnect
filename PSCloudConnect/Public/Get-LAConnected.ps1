@@ -68,7 +68,16 @@ function Get-LAConnected {
             }           
         }
         if ($ExchangeAndMSOL -or $All365 -or $Skype -or $SharePoint -or $Compliance -or $AzureADver2) {
-            Get-LA365Connected
+            if (Test-Path ($KeyPath + "$($Tenant).cred")) {
+                $PwdSecureString = Get-Content ($KeyPath + "$($Tenant).cred") | ConvertTo-SecureString
+                $UsernameString = Get-Content ($KeyPath + "$($Tenant).ucred") 
+                $Credential = New-Object System.Management.Automation.PSCredential -ArgumentList $UsernameString, $PwdSecureString 
+            }
+            else {
+                $Credential = Get-Credential -Message "Enter a username and password TEST"
+                $Credential.Password | ConvertFrom-SecureString | Out-File "$($KeyPath)\$Tenant.cred" -Force
+                $Credential.UserName | Out-File "$($KeyPath)\$Tenant.ucred"
+            }
         }
         if ($ExchangeAndMSOL -or $All365) {
             # Office 365 Tenant
@@ -107,19 +116,6 @@ function Get-LAConnected {
     }
     End {
     } 
-}
-
-function Get-LA365Connected {
-    if (Test-Path ($KeyPath + "$($Tenant).cred")) {
-        $PwdSecureString = Get-Content ($KeyPath + "$($Tenant).cred") | ConvertTo-SecureString
-        $UsernameString = Get-Content ($KeyPath + "$($Tenant).ucred") 
-        $Credential = New-Object System.Management.Automation.PSCredential -ArgumentList $UsernameString, $PwdSecureString 
-    }
-    else {
-        $Credential = Get-Credential -Message "Enter a username and password TEST"
-        $Credential.Password | ConvertFrom-SecureString | Out-File "$($KeyPath)\$Tenant.cred" -Force
-        $Credential.UserName | Out-File "$($KeyPath)\$Tenant.ucred"
-    }
 }
 
 function Get-LAAzureConnected {
