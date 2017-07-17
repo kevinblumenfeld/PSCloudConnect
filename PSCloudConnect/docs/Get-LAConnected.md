@@ -18,8 +18,8 @@ Update-Module PSCloudConnect
 ## SYNTAX
 
 ```
-Get-LAConnected [-Tenant] <String> [-ExchangeAndMSOL] [-All365] [-Azure] [-Skype] [-SharePoint] [-Compliance]
- [-AzureADver2] [-DeleteInvalid365Creds] [-WhatIf] [-Confirm] [<CommonParameters>]
+Get-LAConnected [-Tenant] <String> [-Exchange] [-MSOnline] [-All365] [-Azure] [-Skype] [-SharePoint]
+ [-Compliance] [-AzureADver2] [-MFA] [-Delete365Creds] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,12 +30,11 @@ Connects to some or all of the Office 365/Azure services based on switches provi
 Office 365 tenant name, for example, either contoso or contoso.onmicrosoft.com must be provided with -Tenant parameter
 When connecting to just Azure, it is still required to provide a unique name for the -Tenant parameter.
 
+There is a switch to use Multi-Factor Authentication.  For Exchange Online MFA, you are required to download and use the Exchange Online Remote PowerShell Module.
+To download the Exchange Online Remote PowerShell Module for multi-factor authentication, in the EAC (https://outlook.office365.com/ecp/), go to Hybrid > Setup and click the appropriate Configure button.  When using Multi-Factor Authentication the saving of credentials is not available currently - thus each service will prompt independently for credentials.  Also the Security and Compliance Center does not currently support multi-factor authentication.
+
 Locally saves and encrypts to a file the username and password.
-The encrypted file...
-   
-1.  can only be used on the computer and within the user's profile from which it was created.
-2.  is the same .txt file for all the Office 365 Services.
-3.  for Azure is a separate .json file.
+The encrypted file...can only be used on the computer and within the user's profile from which it was created, is the same .txt file for all the Office 365 services and is a separate .json file for Azure.
 
 If Azure or AzureOnly switch is used **for first time**:
 
@@ -46,7 +45,7 @@ If Azure or AzureOnly switch is used **for first time**:
 If Azure or AzureOnly switch is used:
 
 1.  User will be prompted to pick username used previously
-2.  If a new username is to be used (e.g. username not found when prompted), click Cancel to be prompted to login.
+2.  If a new username is to be used (e.g. username not found when prompted), click **Cancel** to be prompted to login.
 3.  User will be prompted to select which Azure Subscription
 4.  Select the subscription and click "OK"
 
@@ -136,21 +135,6 @@ Aliases:
 Required: True
 Position: 1
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ExchangeAndMSOL
-{{Exchange and MSOnline}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -276,8 +260,53 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DeleteInvalid365Creds
-{{Deletes credentials associated with tenant}}
+### -Delete365Creds
+{{Fill Delete365Creds Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Exchange
+{{Fill Exchange Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MFA
+{{Fill MFA Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MSOnline
+{{Fill MSOnline Description}}
 
 ```yaml
 Type: SwitchParameter
