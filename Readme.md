@@ -1,9 +1,3 @@
----
-external help file: PSCloudConnect-help.xml
-online version: 
-schema: 2.0.0
----
-
 # Get-LAConnected
 
 ## SYNOPSIS
@@ -61,7 +55,7 @@ Transcript is started and kept in $env:USERPROFILE\ps\<tenantspecified\>
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-LAConnected -Tenant Contoso -ExchangeAndMSOL
+Get-LAConnected -Tenant Contoso -Exchange -MSOnline
 ```
 
 Connects to MS Online Service (MSOL) and Exchange Online
@@ -70,7 +64,7 @@ The tenant must be specified, for example either contoso or contoso.onmicrosoft.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-LAConnected -Tenant Contoso -Skype -Azure -ExchangeAndMSOL
+Get-LAConnected -Tenant Contoso -Skype -Azure -Exchange -MSOnline
 ```
 
 Connects to Azure, MS Online Service (MSOL), Exchange Online & Skype
@@ -117,217 +111,7 @@ Connects to Azure, MS Online Service (MSOL), Exchange Online, Skype, SharePoint 
 
 ### -------------------------- EXAMPLE 8 --------------------------
 ```
-Get-LAConnected -Tenant Contoso -Skype -ExchangeAndMSOL
+Get-LAConnected -Tenant Contoso -Skype -Exchange -MSOnline
 ```
 
 Connects to MS Online Service (MSOL) and Exchange Online and Skype Online
-
-## PARAMETERS
-
-### -Tenant
-{{The Tenant Name}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -All365
-{{All Office 365 Services}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Azure
-{{Microsoft Azure}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skype
-{{Microsoft Skype}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SharePoint
-{{Microsoft SharePoint}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Compliance
-{{Office 365 Security and Compliance Center}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AzureADver2
-{{Azure Active Directory Version 2}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Delete365Creds
-{{Fill Delete365Creds Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Exchange
-{{Fill Exchange Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MFA
-{{Fill MFA Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MSOnline
-{{Fill MSOnline Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
-
-## INPUTS
-
-## OUTPUTS
-
-## NOTES
-
-## RELATED LINKS
-

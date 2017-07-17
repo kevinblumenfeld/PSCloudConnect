@@ -61,7 +61,7 @@ Transcript is started and kept in $env:USERPROFILE\ps\<tenantspecified\>
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-LAConnected -Tenant Contoso -ExchangeAndMSOL
+Get-LAConnected -Tenant Contoso -Exchange -MSOnline
 ```
 
 Connects to MS Online Service (MSOL) and Exchange Online
@@ -70,7 +70,7 @@ The tenant must be specified, for example either contoso or contoso.onmicrosoft.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-LAConnected -Tenant Contoso -Skype -Azure -ExchangeAndMSOL
+Get-LAConnected -Tenant Contoso -Skype -Azure -Exchange -MSOnline
 ```
 
 Connects to Azure, MS Online Service (MSOL), Exchange Online & Skype
@@ -117,7 +117,7 @@ Connects to Azure, MS Online Service (MSOL), Exchange Online, Skype, SharePoint 
 
 ### -------------------------- EXAMPLE 8 --------------------------
 ```
-Get-LAConnected -Tenant Contoso -Skype -ExchangeAndMSOL
+Get-LAConnected -Tenant Contoso -Skype -Exchange -MSOnline
 ```
 
 Connects to MS Online Service (MSOL) and Exchange Online and Skype Online

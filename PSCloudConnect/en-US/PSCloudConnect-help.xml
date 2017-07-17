@@ -267,7 +267,7 @@
 </maml:alert>
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -ExchangeAndMSOL</dev:code>
+<dev:code>Get-LAConnected -Tenant Contoso -Exchange -MSOnline</dev:code>
 <dev:remarks><maml:para>Connects to MS Online Service (MSOL) and Exchange Online
 </maml:para>
 <maml:para>The tenant must be specified, for example either contoso or contoso.onmicrosoft.com
@@ -275,7 +275,7 @@
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -Skype -Azure -ExchangeAndMSOL</dev:code>
+<dev:code>Get-LAConnected -Tenant Contoso -Skype -Azure -Exchange -MSOnline</dev:code>
 <dev:remarks><maml:para>Connects to Azure, MS Online Service (MSOL), Exchange Online &amp; Skype
 </maml:para>
 <maml:para>This is to illustrate that any number of individual services can be used to connect.
@@ -313,7 +313,7 @@
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 8 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -Skype -ExchangeAndMSOL</dev:code>
+<dev:code>Get-LAConnected -Tenant Contoso -Skype -Exchange -MSOnline</dev:code>
 <dev:remarks><maml:para>Connects to MS Online Service (MSOL) and Exchange Online and Skype Online
 </maml:para>
 </dev:remarks>
