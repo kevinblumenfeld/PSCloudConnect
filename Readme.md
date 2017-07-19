@@ -84,10 +84,10 @@ Connects to SharePoint Online
 
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
-Get-LAConnected -Tenant Contoso -DeleteInvalid365Creds
+Get-LAConnected -Tenant Contoso -Delete365Creds
 ```
 
-The switch, DeleteInvalid365Creds can be used if invalid credentials were inadvertently entered.
+The switch, Delete365Creds can be used if invalid credentials were inadvertently entered.
 Typically, the symptom would be a user would be prompted each time for credentials, as the saved credential is invalid.
 Use this switch with the mandatory Tenant parameter to delete the appropriate credentials.
 Credentials will then be saved on the following login.

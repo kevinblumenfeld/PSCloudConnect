@@ -307,8 +307,8 @@
 </dev:remarks>
 </command:example>
 <command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-<dev:code>Get-LAConnected -Tenant Contoso -DeleteInvalid365Creds</dev:code>
-<dev:remarks><maml:para>The switch, DeleteInvalid365Creds can be used if invalid credentials were inadvertently entered. Typically, the symptom would be a user would be prompted each time for credentials, as the saved credential is invalid. Use this switch with the mandatory Tenant parameter to delete the appropriate credentials. Credentials will then be saved on the following login.
+<dev:code>Get-LAConnected -Tenant Contoso -Delete365Creds</dev:code>
+<dev:remarks><maml:para>The switch, Delete365Creds can be used if invalid credentials were inadvertently entered. Typically, the symptom would be a user would be prompted each time for credentials, as the saved credential is invalid. Use this switch with the mandatory Tenant parameter to delete the appropriate credentials. Credentials will then be saved on the following login.
 </maml:para>
 </dev:remarks>
 </command:example>
