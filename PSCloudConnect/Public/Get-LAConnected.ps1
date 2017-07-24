@@ -2,8 +2,9 @@
 .EXTERNALHELP PSCloudConnect-help.xml
 #>
 function Get-LAConnected {
+    
  
-    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     Param
     (
 
@@ -115,7 +116,7 @@ function Get-LAConnected {
             }
             else {
                 Try {
-                    Connect-EXOPSSession -UserPrincipalName $Credential.UserName -erroraction Stop
+                    Connect-EXOPSSession -UserPrincipalName $Credential.UserName -ErrorAction Stop
                 } 
                 Catch [System.Management.Automation.CommandNotFoundException] {
                     Write-Output "Exchange Online MFA module is required"
@@ -181,8 +182,8 @@ function Get-LAConnected {
         If ($AzureADver2) {
             if (! $MFA) {
                 Try {
-                    install-module azuread -AllowClobber -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
-                    import-module azuread -Force -ErrorAction Stop
+                    Install-Module -Name AzureAD -MinimumVersion '2.0.0.131' -ErrorAction Stop
+                    Import-Module -Name AzureAD -MinimumVersion '2.0.0.131' -ErrorAction Stop
                     Connect-AzureAD -Credential $Credential -ErrorAction Stop
                 }
                 Catch {
@@ -190,12 +191,13 @@ function Get-LAConnected {
                     Write-Output "Download PowerShell 5 or PowerShellGet"
                     Write-Output "https://msdn.microsoft.com/en-us/powershell/wmf/5.1/install-configure"
                 }
+                
             }
             else {
                 Try {
-                    install-module azuread -AllowClobber -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
-                    import-module azuread -Force -ErrorAction Stop
-                    Connect-AzureAD -ErrorAction Stop
+                    Install-Module -Name AzureAD -MinimumVersion '2.0.0.131' -ErrorAction Stop
+                    Import-Module -Name AzureAD -MinimumVersion '2.0.0.131' -ErrorAction Stop
+                    Connect-AzureAD -Credential $Credential -ErrorAction Stop
                 }
                 Catch {
                     Write-Output "There was an error Connecting to Azure Ad - Ensure the module is installed"
@@ -210,6 +212,8 @@ function Get-LAConnected {
 }
 
 function Get-LAAzureConnected {
+    Install-Module -Name AzureRM -MinimumVersion '4.2.1'
+    Import-Module -Name AzureRM -MinimumVersion '4.2.1'
     if (! $MFA) {
         $json = Get-ChildItem -Recurse -Include '*@*.json' -Path $KeyPath
         if ($json) {
@@ -223,8 +227,7 @@ function Get-LAAzureConnected {
         }
         if (!($json)) {
             Try {
-                install-module AzureRM -Force -erroraction continue
-                $azlogin = Login-AzureRmAccount -erroraction continue
+                $azLogin = Login-AzureRmAccount -ErrorAction Stop
             }
             catch [System.Management.Automation.CommandNotFoundException] {
                 Write-Output "Download and install PowerShell 5.1 or PowerShellGet so the AzureRM module can be automatically installed"
@@ -232,8 +235,8 @@ function Get-LAAzureConnected {
                 Write-Output "or download the MSI installer and install from here: https://github.com/Azure/azure-powershell/releases"
                 Break
             }
-            Save-AzureRmContext -Path ($KeyPath + ($azlogin.Context.Account.Id) + ".json")
-            Import-AzureRmContext -Path ($KeyPath + ($azlogin.Context.Account.Id) + ".json")
+            Save-AzureRmContext -Path ($KeyPath + ($azLogin.Context.Account.Id) + ".json")
+            Import-AzureRmContext -Path ($KeyPath + ($azLogin.Context.Account.Id) + ".json")
         }
         else {
             Import-AzureRmContext -Path ($KeyPath + $json.name)
@@ -253,7 +256,6 @@ function Get-LAAzureConnected {
             Write-Output "   Azure credentials have expired. Authenticate again please."
             Write-Host   "*********************************************************************" -foregroundcolor "magenta" -backgroundcolor "yellow"
             Write-Host   "*********************************************************************" -foregroundcolor "magenta" -backgroundcolor "yellow"
-            
             Remove-Item ($KeyPath + $json.name)
             Get-LAAzureConnected
         }
@@ -280,7 +282,5 @@ function Get-LAAzureConnected {
         Catch {
             Write-Output "There was an error selecting your subscription ID"
         }
-
     }
-
 }
