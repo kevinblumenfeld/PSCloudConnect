@@ -53,6 +53,8 @@ function Get-LAConnected {
         if (! $User) {
             $User = "Default"
         }
+		
+        $host.ui.RawUI.WindowTitle = "Tenant: $($Tenant.ToUpper())"
     }
     Process {
 
@@ -123,7 +125,9 @@ function Get-LAConnected {
         if ($MSOnline -or $All365) {
             # Office 365 Tenant
             Try {
-                Install-Module -Name MSONLINE -ErrorAction SilentlyContinue
+                if (!(Get-Module -ListAvailable MSOnline)) {
+                    Install-Module -Name MSOnline -ErrorAction SilentlyContinue   
+                }
                 Import-Module MsOnline -ErrorAction Stop
             }
             Catch {
@@ -155,9 +159,9 @@ function Get-LAConnected {
                 # Exchange Online
                 $exchangeSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell -Credential $Credential -Authentication Basic -AllowRedirection 
                 Import-Module (Import-PSSession $exchangeSession -AllowClobber -WarningAction SilentlyContinue) -Global | Out-Null
-                Write-Output "*******************************************"
-                Write-Output "You have successfully connected to Exchange"
-                Write-Output "*******************************************"
+                Write-Output "**************************************************"
+                Write-Output "You have successfully connected to Exchange Online"
+                Write-Output "**************************************************"
             }
             else {
                 Try {
